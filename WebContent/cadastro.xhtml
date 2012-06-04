@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="template/common/commonLayout.xhtml">
+
+	<h:outputScript name="script.js" library="javascript"/>
+
+	<ui:define name="content">
+	   
+	   <h:outputText value="Cadastro de Cliente"/>
+	   <br/>
+	   <br/>
+	   
+	   
+	   <h:outputText value="Dados Pessoais"/>
+	   <br/>
+	   <br/>
+	   <h:form>
+	   		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">  
+		   		<h:outputLabel value="Nome completo " />
+		   		<p:inputText value="#{clienteManagedBean.cliente.nome}" size="50" maxlength="50"/>
+		   		
+		   		<h:outputLabel value="CPF "/>
+		   		<p:inputText value="#{clienteManagedBean.cliente.cpf}" size="11" maxlength="11"/>
+		   		
+		   		<h:outputLabel value="Data de Nascimento"/>
+		   		<p:calendar locale="pt" value="#{clienteManagedBean.cliente.dataNasc}"
+				yearRange="c-90:c" navigator="true" effect="slide" id="cal1" pattern="dd/MM/yyyy"/>		   		
+		   		
+		   		<h:outputLabel value="E-mail "/>
+		   		<p:inputText value="#{clienteManagedBean.cliente.email}" size="30" maxlength="30"/>
+		   		
+		   		<h:outputLabel value="Telefone "/>
+		   		<p:inputText value="#{clienteManagedBean.cliente.telefone}"/>
+		   		
+		   		<h:outputLabel value="Logradouro "/>
+		   		<p:inputText value="#{clienteManagedBean.cliente.logradouro}" size="50" maxlength="50"/>
+		   		
+		   		<h:outputLabel value="Bairro "/>
+		   		<p:inputText value="#{clienteManagedBean.cliente.bairro}" size="20"/>
+		   		
+		   		<h:outputLabel value="Cidade "/>
+		   		<p:inputText value="#{clienteManagedBean.cliente.cidade}" size="20"/>
+		   		
+		   		<h:outputLabel value="CEP "/>
+		   		<p:inputText value="#{clienteManagedBean.cliente.cep}"/>
+		   		
+		   		<h:outputLabel value="Estado"/>
+		   		<p:selectOneMenu id="Tipo" value="#{produtoManagedBean.produto.tipo}">
+					<f:selectItem itemLabel="Escolha um estado" itemValue=" "/>
+					<f:selectItem itemLabel="Acre" itemValue="AC"/>
+					<f:selectItem itemLabel="Alagoas" itemValue="AL"/>
+					<f:selectItem itemLabel="Amapá" itemValue="AP"/>
+					<f:selectItem itemLabel="Amazonas" itemValue="AM"/>
+					<f:selectItem itemLabel="Bahia" itemValue="BA"/>
+					<f:selectItem itemLabel="Ceará" itemValue="CE"/>
+					<f:selectItem itemLabel="Distrito Federal" itemValue="DF"/>
+					<f:selectItem itemLabel="Espírito Santo" itemValue="ES"/>
+					<f:selectItem itemLabel="Góias" itemValue="GO"/>
+					<f:selectItem itemLabel="Maranhão" itemValue="MA"/>
+					<f:selectItem itemLabel="Mato Grosso" itemValue="MT"/>
+					<f:selectItem itemLabel="Mato Grosso do Sul" itemValue="MS"/>
+					<f:selectItem itemLabel="Minas Gerais" itemValue="MG"/>
+					<f:selectItem itemLabel="Pará" itemValue="PA"/>
+					<f:selectItem itemLabel="Paraná" itemValue="PR"/>
+					<f:selectItem itemLabel="Pernambuco" itemValue="PE"/>
+					<f:selectItem itemLabel="Paraíba" itemValue="PB"/>
+					<f:selectItem itemLabel="Piauí" itemValue="PI"/>
+					<f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ"/>
+					<f:selectItem itemLabel="Rio Grande do Sul" itemValue="RS"/>
+					<f:selectItem itemLabel="Rio Grande do Norte" itemValue="RN"/>
+					<f:selectItem itemLabel="Rondônia" itemValue="RO"/>
+					<f:selectItem itemLabel="Roraima" itemValue="RR"/>
+					<f:selectItem itemLabel="Santa Catarina" itemValue="SC"/>
+					<f:selectItem itemLabel="São Paulo" itemValue="SP"/>
+					<f:selectItem itemLabel="Sergipe" itemValue="SE"/>
+					<f:selectItem itemLabel="Tocantins" itemValue="TO"/>
+										
+			</p:selectOneMenu>
+   		
+	   		<h:outputLabel value="Loguin/Usuário "/>
+	   		<p:inputText value="#{clienteManagedBean.usuario.login}"/>
+	   		
+	   		<h:outputLabel value="Senha"/>
+	   		<p:password value="#{clienteManagedBean.usuario.senha}"/>
+		
+			<p:commandButton value="Salvar" action="#{clienteManagedBean.salvar}"/>
+		</h:panelGrid>	   		  
+	   </h:form>
+	   
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" >
+
+
+<h:head>
+<h:outputText> Lista de produtos! </h:outputText>
+
+</h:head>
+
+<h:body>
+
+		<h:outputText value="Supermercado On Line"
+			style="font: 18px Arial; font-weight: bold;" />
+		<p />
+		<h:outputText value="Listagem de Produtos"
+			style="font: 16px Arial; font-weight: bold; color: gray;" />
+		<p />
+		<h:form>
+			<h:messages layout="table" errorStyle="color: red"
+				infoStyle="color: green" warnStyle="color: orange"
+				fatalStyle="color: gray" style="font: 14px Arial;"
+				showSummary="false" showDetail="true" />
+			
+			<p:dataTable value="#{produtoManagedBean.produtos}" var="item" >
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Foto" />
+					</f:facet>
+						<h:graphicImage name="#{item.url}" library="images"/>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome" />
+					</f:facet>
+					<h:outputText value="#{item.nome}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Marca" />
+					</f:facet>
+					<h:outputText value="#{item.marca}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Preço" />
+					</f:facet>
+					<h:outputText value="#{item.preco}" />
+				</p:column>
+				
+				<p:column>
+				<h:commandLink actionListener="#{produtoManagedBean.excluir}"> 
+					<f:attribute name="produto" value="#{item}" />
+					<h:graphicImage name="excluir.png" library="images"
+						style="border: none" />
+				</h:commandLink>
+				</p:column>
+				 
+				<p:column>
+				<h:commandLink action="#{produtoManagedBean.incluir}">
+					<f:setPropertyActionListener value="#{item}"
+						target="#{produtoManagedBean.produto}" />
+					<h:graphicImage name="editar.png" library="images"
+						style="border: none" />
+				</h:commandLink>
+				</p:column>
+			</p:dataTable>
+
+			<p />
+			<p:commandButton value="Incluir" action="#{produtoManagedBean.incluir}" />
+			<p:commandButton value="Voltar" action="menu?faces-redirect=true" />
+		</h:form>
+		
+
+
+</h:body>
+</html>

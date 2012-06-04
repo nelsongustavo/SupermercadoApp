@@ -1,0 +1,12 @@
+TUTORIAL - APP
+
+1. Checar se o classpath contem as libs do Jboss client
+
+
+TUTORIAL - EJB 
+
+1. Importar arquivo SupermercadoEJB.jar
+
+2. Copiar a biblioteca do mysql para a pasta jboss-5.0.1.GA\server\default\lib
+
+3. Colocar o arquivo escola-ds.xml	\jboss-5.0.1.GA\server\default\deploy
