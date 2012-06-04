@@ -1,0 +1,4 @@
+SupermercadoApp
+===============
+
+Projeto de talp.
