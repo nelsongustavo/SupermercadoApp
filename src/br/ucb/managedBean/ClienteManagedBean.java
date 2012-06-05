@@ -66,7 +66,8 @@ public class ClienteManagedBean {
 		this.usuario = new Usuario();
 		this.clientes = clienteBean.listar();
 		JSFMensageiro.info("Cadastrado com sucesso!");		
-		return "index";
+			
+		return "produtos";
 	}
 
 	public ClienteRemote getClienteBean() {
