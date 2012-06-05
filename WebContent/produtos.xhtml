@@ -29,10 +29,10 @@
  					
  					<h:column>
  						
- 						<h:form>
- 							<h:outputLabel value="Qtd "/>
+ 						<h:form rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
+ 							<h:outputLabel value="Qtd " />
  							<h:inputText value="#{principalManagedBean.item.quantidade}" size="3"/>
- 							<h:commandLink actionListener="#{principalManagedBean.addItem}">
+ 							<h:commandLink actionListener="#{principalManagedBean.addItem}" >
 	 								<f:attribute name="produto" value="#{produto}" />
 	 								<h:graphicImage value="/resources/images/carrinho.png" style="border:0;width:25%" title="Adicionar ao Carrinho"/>
 	 						</h:commandLink>

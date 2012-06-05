@@ -6,30 +6,21 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<ui:composition template="/template/common/commonLayout.xhtml">
 
-	<ui:define name="content">
+<h:body>
  		
- 		<h:form id="formulario">
- 			
- 			<h:outputLabel value="login "/>
- 			<h:inputText value=""/><br/><br/>
- 			
- 			<h:outputLabel value="Senha"/>
- 			<h:inputHidden value="" id="senha"/>
- 			<br/>
- 			
- 			<applet code="Teclado.class" codebase="./" archive="teclado.jar" width="100" height="100">
- 				<param name="limpa" value="Limpa"/> Seu navegador ignora completamente a tag applet 
- 			</applet>
- 			<br/>
- 			<br/>
- 			<!-- <h:commandButton value="Entrar" action=""/> -->
- 			
- 		</h:form>
+ 		<f:view>
+		<h:outputText value="Login" style="font: 18px Arial; font-weight: bold; color: #000099;" />
+		<p />
+		<form action="j_security_check" method="post">
+			<label>Usuario:</label><br />
+			<input type="text" name="j_username" /><p />
+			<label>Senha:</label><br />
+			<input type="password" name="j_password" /><p />
+			<input type="submit" value="OK" />
+		</form>
+	</f:view>
  		
- 			
-	</ui:define>
-
-</ui:composition>
+ </h:body>			
+ 
 </html>

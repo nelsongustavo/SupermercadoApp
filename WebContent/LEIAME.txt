@@ -10,3 +10,30 @@ TUTORIAL - EJB
 2. Copiar a biblioteca do mysql para a pasta jboss-5.0.1.GA\server\default\lib
 
 3. Colocar o arquivo escola-ds.xml	\jboss-5.0.1.GA\server\default\deploy
+
+
+--------------------------------------------------------------------------
+
+Tutorial JAAS
+
+Configurar o SERVER.xml do TOMCAT:
+
+1. adicionar o seguinte codigo após <Host appBase=...
+
+ <Realm
+		className="org.apache.catalina.realm.JDBCRealm"
+
+		driverName="com.mysql.jdbc.Driver"
+		connectionURL="jdbc:mysql://localhost/supermercadobd"
+		connectionName="root"
+		connectionPassword="root"
+
+		userTable="usuario"
+		userNameCol="login"
+		userCredCol="senha"
+
+		userRoleTable="autorizacao"
+		roleNameCol="papel"
+/>
+
+2. copiar a biblioteca(driver) do Mysql para pasta LIB do TOMCAT
