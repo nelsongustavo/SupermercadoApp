@@ -7,7 +7,7 @@
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.jsf</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
@@ -16,7 +16,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
+    <url-pattern>*.jsf</url-pattern>
   </servlet-mapping>
   <context-param>
     <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
@@ -30,4 +30,60 @@
   <listener>
     <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
   </listener>
+  
+  	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login.jsf</form-login-page>
+			<form-error-page>/erro.jsf</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<error-page>
+		<error-code>403</error-code>
+		<location>/acessoNegado.jsf</location>
+	</error-page>
+
+	<security-role>
+		<role-name>adm</role-name>
+	</security-role>
+	<security-role>
+		<role-name>cliente</role-name>
+	</security-role>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Publico</web-resource-name>
+			<url-pattern>/publico/*</url-pattern>
+		</web-resource-collection>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Adm</web-resource-name>
+			<url-pattern>/restrito/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>adm</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Cliente</web-resource-name>
+			<url-pattern>/cliente/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>cliente</role-name>
+			<role-name>adm</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Comum</web-resource-name>
+			<url-pattern>/comum/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>adm</role-name>
+			<role-name>cliente</role-name>
+		</auth-constraint>
+	</security-constraint>
 </web-app>
