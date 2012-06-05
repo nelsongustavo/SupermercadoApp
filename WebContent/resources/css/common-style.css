@@ -1,5 +1,9 @@
 @CHARSET "ISO-8859-1";
 
+body{
+	background: #5C9F41;
+}
+
 #page{
 	width: 800px;
 	margin: 0 auto;
@@ -17,11 +21,11 @@
 #content{
 	font-family:Verdana, Geneva, sans-serif;
 	font-size:11px;
-	width: 100%;
+	width: 780px;
 	padding:10px;
-	margin-right:16px;
 	margin-bottom:16px;
 	border: 1px solid #000;
+	background: #FFF;
 	
 }
 
@@ -29,7 +33,8 @@
 	font-family:Verdana, Geneva, sans-serif;
 	font-size:10px;
 	width: 100%;
-	height:100px;
+	height:30px;
 	border: 1px solid #000;
 	text-align: center;
+	background: #E2E2E2;
 }

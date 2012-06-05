@@ -9,9 +9,6 @@
 
 
 <ui:composition template="template/common/commonLayout.xhtml">
-
-	<h:outputScript name="script.js" library="javascript"/>
-
 	<ui:define name="content">
 	   
 	   <h:outputText value="Cadastro de Cliente"/>
@@ -23,9 +20,11 @@
 	   <br/>
 	   <br/>
 	   <h:form>
-	   		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">  
+	   			<h:outputScript name="script.js" library="javascript"/>
+	   			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+	   			   			  
 		   		<h:outputLabel value="Nome completo " />
-		   		<p:inputText value="#{clienteManagedBean.cliente.nome}" size="50" maxlength="50"/>
+		   		<p:inputText value="#{clienteManagedBean.cliente.nome}" size="50" maxlength="50" required="true"/>
 		   		
 		   		<h:outputLabel value="CPF "/>
 		   		<p:inputText value="#{clienteManagedBean.cliente.cpf}" size="11" maxlength="11"/>
