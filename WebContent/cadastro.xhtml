@@ -8,92 +8,148 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-<ui:composition template="template/common/commonLayout.xhtml">
-	<ui:define name="content">
-	   
-	   <h:outputText value="Cadastro de Cliente"/>
-	   <br/>
-	   <br/>
-	   
-	   
-	   <h:outputText value="Dados Pessoais"/>
-	   <br/>
-	   <br/>
-	   <h:form>
-	   			<h:outputScript name="script.js" library="javascript"/>
-	   			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-	   			   			  
-		   		<h:outputLabel value="Nome completo " />
-		   		<p:inputText value="#{clienteManagedBean.cliente.nome}" size="50" maxlength="50" required="true"/>
-		   		
-		   		<h:outputLabel value="CPF "/>
-		   		<p:inputText value="#{clienteManagedBean.cliente.cpf}" size="11" maxlength="11"/>
-		   		
-		   		<h:outputLabel value="Data de Nascimento"/>
-		   		<p:calendar locale="pt" value="#{clienteManagedBean.cliente.dataNasc}"
-				yearRange="c-90:c" navigator="true" effect="slide" id="cal1" pattern="dd/MM/yyyy"/>		   		
-		   		
-		   		<h:outputLabel value="E-mail "/>
-		   		<p:inputText value="#{clienteManagedBean.cliente.email}" size="30" maxlength="30"/>
-		   		
-		   		<h:outputLabel value="Telefone "/>
-		   		<p:inputText value="#{clienteManagedBean.cliente.telefone}"/>
-		   		
-		   		<h:outputLabel value="Logradouro "/>
-		   		<p:inputText value="#{clienteManagedBean.cliente.logradouro}" size="50" maxlength="50"/>
-		   		
-		   		<h:outputLabel value="Bairro "/>
-		   		<p:inputText value="#{clienteManagedBean.cliente.bairro}" size="20"/>
-		   		
-		   		<h:outputLabel value="Cidade "/>
-		   		<p:inputText value="#{clienteManagedBean.cliente.cidade}" size="20"/>
-		   		
-		   		<h:outputLabel value="CEP "/>
-		   		<p:inputText value="#{clienteManagedBean.cliente.cep}"/>
-		   		
-		   		<h:outputLabel value="Estado"/>
-		   		<p:selectOneMenu id="Tipo" value="#{produtoManagedBean.produto.tipo}">
-					<f:selectItem itemLabel="Escolha um estado" itemValue=" "/>
-					<f:selectItem itemLabel="Acre" itemValue="AC"/>
-					<f:selectItem itemLabel="Alagoas" itemValue="AL"/>
-					<f:selectItem itemLabel="Amapá" itemValue="AP"/>
-					<f:selectItem itemLabel="Amazonas" itemValue="AM"/>
-					<f:selectItem itemLabel="Bahia" itemValue="BA"/>
-					<f:selectItem itemLabel="Ceará" itemValue="CE"/>
-					<f:selectItem itemLabel="Distrito Federal" itemValue="DF"/>
-					<f:selectItem itemLabel="Espírito Santo" itemValue="ES"/>
-					<f:selectItem itemLabel="Góias" itemValue="GO"/>
-					<f:selectItem itemLabel="Maranhão" itemValue="MA"/>
-					<f:selectItem itemLabel="Mato Grosso" itemValue="MT"/>
-					<f:selectItem itemLabel="Mato Grosso do Sul" itemValue="MS"/>
-					<f:selectItem itemLabel="Minas Gerais" itemValue="MG"/>
-					<f:selectItem itemLabel="Pará" itemValue="PA"/>
-					<f:selectItem itemLabel="Paraná" itemValue="PR"/>
-					<f:selectItem itemLabel="Pernambuco" itemValue="PE"/>
-					<f:selectItem itemLabel="Paraíba" itemValue="PB"/>
-					<f:selectItem itemLabel="Piauí" itemValue="PI"/>
-					<f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ"/>
-					<f:selectItem itemLabel="Rio Grande do Sul" itemValue="RS"/>
-					<f:selectItem itemLabel="Rio Grande do Norte" itemValue="RN"/>
-					<f:selectItem itemLabel="Rondônia" itemValue="RO"/>
-					<f:selectItem itemLabel="Roraima" itemValue="RR"/>
-					<f:selectItem itemLabel="Santa Catarina" itemValue="SC"/>
-					<f:selectItem itemLabel="São Paulo" itemValue="SP"/>
-					<f:selectItem itemLabel="Sergipe" itemValue="SE"/>
-					<f:selectItem itemLabel="Tocantins" itemValue="TO"/>
-										
-			</p:selectOneMenu>
-   		
-	   		<h:outputLabel value="Loguin/Usuário "/>
-	   		<p:inputText value="#{clienteManagedBean.usuario.login}"/>
-	   		
-	   		<h:outputLabel value="Senha"/>
-	   		<p:password value="#{clienteManagedBean.usuario.senha}"/>
-		
-			<p:commandButton value="Salvar" action="#{clienteManagedBean.salvar}"/>
-		</h:panelGrid>	   		  
-	   </h:form>
-	   
-	</ui:define>
-</ui:composition>
+<h:body>
+		<h:outputText value="Cadastro de Cliente" />
+		<br />
+		<br />
+
+
+		<h:outputText value="Dados Pessoais" />
+		<br />
+		<br />
+		<h:form>
+			<h:outputScript name="script.js" library="javascript" />
+
+			<p:panel id="panel">
+				<p:messages id="msgs" />
+
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+
+					<h:outputLabel value="Nome completo" for="nome" />
+					<p:inputText id="nome" value="#{clienteManagedBean.cliente.nome}"
+						size="50" maxlength="50" required="true" label="Nome">
+						<f:validateLength minimum="2" />
+						<p:ajax update="msgNome" event="keyup" />
+					</p:inputText>
+					<p:message id="msgNome" for="nome" display="icon" />
+
+					<h:outputLabel value="CPF" for="cpf" />
+					<p:inputMask id="cpf" value="#{clienteManagedBean.cliente.cpf}"
+						mask="999.999.999-99" size="11" maxlength="11" label="CPF"
+						required="true">
+						<f:validateLength minimum="2" />
+						<p:ajax update="msgNome" event="keyup" />
+					</p:inputMask>
+					<p:message id="msgNome" for="cpf" display="icon" />
+
+
+					<h:outputLabel value="Data de Nascimento" for="dataNasc" />
+					<p:calendar locale="pt"
+						value="#{clienteManagedBean.cliente.dataNasc}" yearRange="c-90:c"
+						navigator="true" effect="slide" id="cal1" pattern="dd/MM/yyyy"
+						required="true" label="Data" />
+					<p:message id="msgNome" display="icon" />
+
+					<h:outputLabel value="E-mail" for="email" />
+					<p:inputText id="email" value="#{clienteManagedBean.cliente.email}"
+						size="30" maxlength="30" required="true" label="E-mail">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+					</p:inputText>
+					<p:message id="msgNome" for="email" display="icon" />
+
+					<h:outputLabel value="Telefone " for="telefone" />
+					<p:inputMask id="telefone"
+						value="#{clienteManagedBean.cliente.telefone}"
+						mask="(99)9999-9999" required="true" label="telefone">
+						<f:validateLength minimum="8" />
+						<p:ajax update="msgNome" event="keyup" />
+					</p:inputMask>
+					<p:message id="msgNome" for="telefone" display="icon" />
+
+					<h:outputLabel value="Logradouro " for="logradouro" />
+					<p:inputText id="logradouro"
+						value="#{clienteManagedBean.cliente.logradouro}" size="50"
+						maxlength="50" />
+
+					<p:message id="msgNome" for="logradouro" display="icon" />
+
+					<h:outputLabel value="Bairro " for="bairro" />
+					<p:inputText id="bairro"
+						value="#{clienteManagedBean.cliente.bairro}" size="20" />
+					<p:message id="msgNome" for="bairro" display="icon" />
+
+					<h:outputLabel value="Cidade " for="cidade" />
+					<p:inputText id="cidade"
+						value="#{clienteManagedBean.cliente.cidade}" size="20" />
+					<p:message id="msgNome" for="cidade" display="icon" />
+
+					<h:outputLabel value="CEP " for="cep" />
+					<p:inputText id="cep" required="true"
+						value="#{clienteManagedBean.cliente.cep}" label="CEP">
+						<f:validateLength minimum="4" />
+						<p:ajax update="msgNome" event="keyup" />
+					</p:inputText>
+					<p:message id="msgNome" for="cep" display="icon" />
+
+
+					<h:outputLabel value="Estado" for="tipo" />
+					<p:selectOneMenu id="Tipo"
+						value="#{produtoManagedBean.produto.tipo}">
+						<f:selectItem itemLabel="Escolha um estado" itemValue=" " />
+						<f:selectItem itemLabel="Acre" itemValue="AC" />
+						<f:selectItem itemLabel="Alagoas" itemValue="AL" />
+						<f:selectItem itemLabel="Amapá" itemValue="AP" />
+						<f:selectItem itemLabel="Amazonas" itemValue="AM" />
+						<f:selectItem itemLabel="Bahia" itemValue="BA" />
+						<f:selectItem itemLabel="Ceará" itemValue="CE" />
+						<f:selectItem itemLabel="Distrito Federal" itemValue="DF" />
+						<f:selectItem itemLabel="Espírito Santo" itemValue="ES" />
+						<f:selectItem itemLabel="Góias" itemValue="GO" />
+						<f:selectItem itemLabel="Maranhão" itemValue="MA" />
+						<f:selectItem itemLabel="Mato Grosso" itemValue="MT" />
+						<f:selectItem itemLabel="Mato Grosso do Sul" itemValue="MS" />
+						<f:selectItem itemLabel="Minas Gerais" itemValue="MG" />
+						<f:selectItem itemLabel="Pará" itemValue="PA" />
+						<f:selectItem itemLabel="Paraná" itemValue="PR" />
+						<f:selectItem itemLabel="Pernambuco" itemValue="PE" />
+						<f:selectItem itemLabel="Paraíba" itemValue="PB" />
+						<f:selectItem itemLabel="Piauí" itemValue="PI" />
+						<f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ" />
+						<f:selectItem itemLabel="Rio Grande do Sul" itemValue="RS" />
+						<f:selectItem itemLabel="Rio Grande do Norte" itemValue="RN" />
+						<f:selectItem itemLabel="Rondônia" itemValue="RO" />
+						<f:selectItem itemLabel="Roraima" itemValue="RR" />
+						<f:selectItem itemLabel="Santa Catarina" itemValue="SC" />
+						<f:selectItem itemLabel="São Paulo" itemValue="SP" />
+						<f:selectItem itemLabel="Sergipe" itemValue="SE" />
+						<f:selectItem itemLabel="Tocantins" itemValue="TO" />
+
+					</p:selectOneMenu>
+					<p:message id="msgNome" for="tipo" display="icon" />
+
+					<h:outputLabel value="Login/Usuário " for="login" />
+					<p:inputText id="login" value="#{clienteManagedBean.usuario.login}"
+						required="true" label="Login">
+						<f:validateLength minimum="4" />
+						<p:ajax update="msgNome" event="keyup" />
+					</p:inputText>
+					<p:message id="msgNome" for="login" display="icon" />
+
+<!-- 					<h:outputLabel value="Senha" id="senha" /> -->
+<!-- 					<p:password id="senha" value="#{clienteManagedBean.usuario.senha}" required="true" label="Senha" feedback="true"    -->
+<!--                         promptLabel="Por favor entre com a senha" weakLabel="FRACA!"   -->
+<!--                         goodLabel="Boa!" strongLabel="Forte" > -->
+<!--                         <f:validateLength minimum="4" /> -->
+<!-- 						<p:ajax update="msgNome" event="keyup" /> -->
+<!--                         </p:password> -->
+<!--                         <p:message id="msgNome" for="login" display="icon" /> -->
+                        
+
+					<p:commandButton value="Salvar"	action="#{clienteManagedBean.salvar}" update="panel"/>
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+
+</h:body>
 </html>

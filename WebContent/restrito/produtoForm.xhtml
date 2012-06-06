@@ -13,37 +13,67 @@
 </h:head>
 
 <h:body>
-	
 	<h:form enctype="multipart/form-data">
-		<p:panelGrid columns="2">
-			
-			<f:facet name="header">
+		<p:panel id="panel">
+
+			<p:messages id="msgs" />
+
+
+			<p:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+
+				<f:facet name="header">
 				 Cadastro Produto
-			</f:facet>
-			
-			<h:outputLabel value="Nome" for="nome" />
-			<p:inputText id="nome" value="#{produtoManagedBean.produto.nome}" />
+				</f:facet>
 
-			<h:outputLabel value="Marca" for="marca" />
-			<p:inputText id="marca" value="#{produtoManagedBean.produto.marca}" />
-			
-			<h:outputLabel value="Tipo" for="Tipo" />
-			<p:selectOneMenu id="Tipo" value="#{produtoManagedBean.produto.tipo}" >
-				<f:selectItem itemLabel="Escolha Um" itemValue=" "/>
-				<f:selectItem itemLabel="Alimenticio" itemValue="alimenticio"/>
-				<f:selectItem itemLabel="Higiene" itemValue="higiene"/>
-				<f:selectItem itemLabel="Limpeza" itemValue="limpeza"/>
-			</p:selectOneMenu>
+				<h:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" value="#{produtoManagedBean.produto.nome}"
+					label="Nome" required="true">
+					<f:validateLength minimum="2" />
+					<p:ajax update="msgNome" event="keyup" />
+				</p:inputText>
+				<p:message id="msgNome" for="nome" display="icon" />
 
-			<h:outputLabel value="Preço" for="preco" />
-			<p:inputText id="preco" value="#{produtoManagedBean.produto.preco}" />
-				   				
-			<f:facet name="footer">
-				<p:commandButton value="Salvar"	action="#{produtoManagedBean.salvar}"/>
-				<p:commandButton value="Voltar" action="produtoLista?faces-recirect=true"/>
-			</f:facet>
+				<h:outputLabel value="Marca" for="marca" />
+				<p:inputText id="marca" value="#{produtoManagedBean.produto.marca}"
+					label="Marca" required="true">
+					<f:validateLength minimum="2" />
+					<p:ajax update="msgMarca" event="keyup" />
+				</p:inputText>
+				<p:message id="msgMarca" for="marca" display="icon" />
 
-		</p:panelGrid>
+
+				<h:outputLabel value="Tipo" for="Tipo" />
+				<p:selectOneMenu id="Tipo"
+					value="#{produtoManagedBean.produto.tipo}" label="Tipo"
+					required="true">
+					<f:selectItem itemLabel="Escolha Um" itemValue=" " />
+					<f:selectItem itemLabel="Alimenticio" itemValue="alimenticio" />
+					<f:selectItem itemLabel="Higiene" itemValue="higiene" />
+					<f:selectItem itemLabel="Limpeza" itemValue="limpeza" />
+				</p:selectOneMenu>
+				<p:message id="msgTipo" for="Tipo" display="icon" />
+
+				<h:outputLabel value="Preço" for="preco" />
+				<p:inputText id="preco" value="#{produtoManagedBean.produto.preco}"
+					label="Preco" required="true" />
+					<p:message id="msgPreco" for="preco" display="icon" />
+
+				<h:outputLabel value="Foto" for="foto" />
+				<p:fileUpload id="foto"
+					fileUploadListener="#{produtoManagedBean.uploadAction}"
+					update="messages" label="Foto" required="true"/>
+				<p:growl id="messages" showDetail="true" />
+				
+				<p:message id="msgfoto" for="foto" display="icon" />
+
+				<f:facet name="footer">
+					<p:commandButton value="Salvar"
+						action="#{produtoManagedBean.salvar}" update="panel" />
+					<p:commandButton value="Voltar" ajax="false"
+						action="produtoLista?faces-recirect=true" />
+				</f:facet>
+			</p:panelGrid>
+		</p:panel>
 	</h:form>
 </h:body>
 </html>
