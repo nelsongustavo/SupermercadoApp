@@ -83,7 +83,10 @@ public class PrincipalManagedBean {
 		this.item = new Item();
 	}
 
-
+	public String listar(){
+		this.produtos = produtoBean.listar();
+		return "produtos";
+	}
 	
-	
+    
 }

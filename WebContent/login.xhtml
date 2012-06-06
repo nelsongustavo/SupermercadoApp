@@ -9,6 +9,9 @@
 
 <h:body>
  		
+<ui:composition template="/template/common/commonLayout.xhtml">
+	<ui:define name="content">
+ 		
  		<f:view>
 		<h:outputText value="Login" style="font: 18px Arial; font-weight: bold; color: #000099;" />
 		<p />
@@ -20,6 +23,9 @@
 			<input type="submit" value="OK" />
 		</form>
 	</f:view>
+	</ui:define>
+</ui:composition>
+
  		
  </h:body>			
  
