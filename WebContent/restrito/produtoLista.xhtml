@@ -24,12 +24,16 @@
 			style="font: 16px Arial; font-weight: bold; color: gray;" />
 		<p />
 		<h:form>
-			<h:messages layout="table" errorStyle="color: red"
-				infoStyle="color: green" warnStyle="color: orange"
-				fatalStyle="color: gray" style="font: 14px Arial;"
-				showSummary="false" showDetail="true" />
 			
 			<p:dataTable value="#{produtoManagedBean.produtos}" var="item" >
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="ID" />
+					</f:facet>
+					<h:outputText value="#{item.id}" />
+				</p:column>
+				
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Foto" />
@@ -50,6 +54,13 @@
 					</f:facet>
 					<h:outputText value="#{item.marca}" />
 				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Tipo" />
+					</f:facet>
+					<h:outputText value="#{item.tipo}" />
+				</p:column>
 
 				<p:column>
 					<f:facet name="header">
@@ -59,10 +70,11 @@
 				</p:column>
 				
 				<p:column>
-				<h:commandLink actionListener="#{produtoManagedBean.excluir}"> 
+				<h:commandLink actionListener="#{produtoManagedBean.excluir}" update="messages"> 
 					<f:attribute name="produto" value="#{item}" />
 					<h:graphicImage name="excluir.png" library="images"
 						style="border: none" />
+						<p:growl id="messages" showDetail="true"/>
 				</h:commandLink>
 				</p:column>
 				 

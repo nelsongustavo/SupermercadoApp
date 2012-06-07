@@ -110,7 +110,11 @@ public void uploadAction (FileUploadEvent event){
 	        }  
 
 		}catch (Exception ex){
+<<<<<<< HEAD
 			FacesMessage msg = new FacesMessage("ERRO", event.getFile().getFileName() + "Não foi upada!");  
+=======
+			FacesMessage msg = new FacesMessage("ERRO", event.getFile().getFileName() + "NÃ£o foi upada!");  
+>>>>>>> 9e882840f6f5ad5b72851c3bb5f7ceaa2021327f
             FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 	}
