@@ -1,12 +1,23 @@
 package br.ucb.managedBean;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.ServletContext;
+
+import org.primefaces.event.FileUploadEvent;
 
 import br.ucb.entityBean.Produto;
 import br.ucb.sessionBean.ProdutoRemote;
@@ -17,6 +28,8 @@ public class ProdutoManagedBean {
 	private ProdutoRemote produtoBean; 
 	private Produto produto;
 	private List<Produto> produtos;
+	byte[] foto;
+	String arquivo;
 	
 	public ProdutoManagedBean(){
 		try{
@@ -34,14 +47,10 @@ public class ProdutoManagedBean {
 	}
 	
 	public String incluir(){
-		return "/restrito/produtoForm";
+		return "/restrito/produtoForm?faces-redirect=true";
 	}
 	
 	public String salvar() {
-		System.out.println("id : "+this.produto.getId());
-		System.out.println("nome: "+this.produto.getNome());
-		System.out.println("marca:"+this.produto.getMarca());
-		
 		if(this.produto.getId() == 0){
 			System.out.println("Salvar !!");
 			this.produtoBean.salvar(this.produto);
@@ -50,9 +59,11 @@ public class ProdutoManagedBean {
 			this.produtoBean.alterar(this.produto);	
 		}
 		
+		gravar();
+		
+		JSFMensageiro.info("Sucesso", this.produto.getNome() + " Gravado com sucesso");
 		this.produto = new Produto();
 		this.produtos = this.produtoBean.listar();
-		JSFMensageiro.info("Curso incluido com sucesso!");
 		return "produtoLista";
 	}
 	
@@ -65,13 +76,67 @@ public class ProdutoManagedBean {
 	public void excluir(ActionEvent evento) {
 		this.produto = (Produto) evento.getComponent().getAttributes().get("produto");
 		if (this.produtoBean.excluir(this.produto)) {
-		JSFMensageiro.info("Curso excluido com sucesso!");
+		
+		JSFMensageiro.info("Sucesso", this.produto.getNome() + " Excluido com sucesso!");
+		
 		this.produtos = this.produtoBean.listar();
 		}
 		else
 		JSFMensageiro.error("Erro inesperado ao excluir curso!");
 		this.produto = new Produto();
 	}
+	
+	
+public void uploadAction (FileUploadEvent event){
+		
+		try {
+			
+			
+			// pegando a foto
+			foto = event.getFile().getContents();
+			Date data = new Date();
+			//pegando o nome da foto com o caminho
+			String nome = (data.getTime() + ".jpg");
+			
+			//pegando o caminho que a foto vai ser gravada
+			FacesContext facesContext = FacesContext.getCurrentInstance();  
+			ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
+			arquivo = scontext.getRealPath("/resources/images/" + nome);
+			
+			//setando o nome da foto no banco
+			this.produto.setUrl(nome);
+			
+			if(foto != null) {  
+	            FacesMessage msg = new FacesMessage("Sucesso", event.getFile().getFileName() + "Foi upada!");  
+	            FacesContext.getCurrentInstance().addMessage(null, msg);  
+	        }  
+
+		}catch (Exception ex){
+			FacesMessage msg = new FacesMessage("ERRO", event.getFile().getFileName() + "Não foi upada!");  
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+	}
+		//gravar imagen na aplicacao
+		public void gravar(){
+			FileOutputStream fos;
+			try {
+			//passando o caminho;	
+			fos = new FileOutputStream(arquivo);
+			//passando o arquivo;
+			fos.write(foto);
+			fos.close();
+			
+			} catch (FileNotFoundException ex) {
+			Logger.getLogger(ProdutoManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+			} catch (IOException ex) {
+			Logger.getLogger(ProdutoManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+			}
+	}
+	
+	
+	
+	
+	
 	
 	public ProdutoRemote getProdutoBean() {
 		return produtoBean;
