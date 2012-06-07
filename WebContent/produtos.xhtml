@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+    <h:body>
+ 
+    	<ui:composition template="/template/common/commonLayout.xhtml">
+ 			<ui:define name="content">
+ 				
+ 				
+ 				<h:dataTable value="#{principalManagedBean.produtos}" var="produto" border="0">	
+ 					<h:column >
+ 						<f:facet name="header">
+ 							<h:outputText value="Produto"/> 					
+ 						</f:facet>
+ 						<h:outputText value="#{produto.nome}"/>				
+ 					</h:column> 		
+ 					
+ 					<h:column>
+ 						<f:facet name="header">
+ 							<h:outputText value="Preço"/>
+ 						</f:facet>
+ 						<h:outputText value="#{produto.preco}"/> 					
+ 					</h:column>	
+ 					
+ 					<h:column>
+ 						
+ 						<h:form rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
+ 							<h:outputLabel value="Qtd " />
+ 							<h:inputText value="#{principalManagedBean.item.quantidade}" size="3"/>
+ 							<h:commandLink actionListener="#{principalManagedBean.addItem}" >
+	 								<f:attribute name="produto" value="#{produto}" />
+	 								<h:graphicImage value="/resources/images/carrinho.png" style="border:0;width:25%" title="Adicionar ao Carrinho"/>
+	 						</h:commandLink>
+ 						</h:form>
+ 						
+ 						 						
+ 					</h:column>						
+ 				</h:dataTable>
+ 				
+ 			</ui:define>
+    	</ui:composition>
+ 
+    </h:body>
+ 
+</html>

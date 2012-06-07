@@ -52,10 +52,8 @@ public class ProdutoManagedBean {
 	
 	public String salvar() {
 		if(this.produto.getId() == 0){
-			System.out.println("Salvar !!");
 			this.produtoBean.salvar(this.produto);
 		}else{
-			System.out.println("Alterar !!");
 			this.produtoBean.alterar(this.produto);	
 		}
 		
