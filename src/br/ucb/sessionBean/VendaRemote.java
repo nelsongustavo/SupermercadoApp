@@ -10,6 +10,6 @@ import br.ucb.entityBean.Venda;
 public interface VendaRemote {
 	public Venda consultar(int id);
 	public List<Venda> listar();
-	public void salvar(Venda venda);
 	public boolean excluir(Venda venda);
+	public Venda salvar(Venda venda);
 }
